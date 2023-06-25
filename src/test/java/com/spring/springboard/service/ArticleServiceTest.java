@@ -1,6 +1,8 @@
 package com.spring.springboard.service;
 
 import com.spring.springboard.domain.Article;
+import com.spring.springboard.domain.type.SearchType;
+import com.spring.springboard.dto.ArticleDto;
 import com.spring.springboard.repository.ArticleRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -27,7 +29,7 @@ class ArticleServiceTest {
         //Given
 
         //When
-        List<ArticleDTO> articles = sut.searchArticles(SearchType.TITLE, "search keyword"); //제목, 본문, ID, 닉네임, 해시태그
+        List<ArticleDto> articles = sut.searchArticles(SearchType.TITLE, "search keyword"); //제목, 본문, ID, 닉네임, 해시태그
         //Then
         assertThat(articles).isNotNull();
     }
