@@ -10,6 +10,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.data.domain.Page;
 
 import java.util.List;
 
@@ -29,7 +30,17 @@ class ArticleServiceTest {
         //Given
 
         //When
-        List<ArticleDto> articles = sut.searchArticles(SearchType.TITLE, "search keyword"); //제목, 본문, ID, 닉네임, 해시태그
+        Page<ArticleDto> articles = sut.searchArticles(SearchType.TITLE, "search keyword"); //제목, 본문, ID, 닉네임, 해시태그
+        //Then
+        assertThat(articles).isNotNull();
+    }
+    @DisplayName("게시글 검색시, 게시글 리스트를 반환")
+    @Test
+    void givenArticleId_whenSearchingArticle_thenReturnArticle() {
+        //Given
+
+        //When
+        ArticleDto articles = sut.searchArticle(1L); //제목, 본문, ID, 닉네임, 해시태그
         //Then
         assertThat(articles).isNotNull();
     }
