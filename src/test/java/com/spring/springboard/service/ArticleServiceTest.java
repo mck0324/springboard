@@ -12,9 +12,12 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.data.domain.Page;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.BDDMockito.*;
 
 @DisplayName("비즈니스 로직 - 게시글")
 @ExtendWith(MockitoExtension.class)
@@ -43,6 +46,21 @@ class ArticleServiceTest {
         ArticleDto articles = sut.searchArticle(1L); //제목, 본문, ID, 닉네임, 해시태그
         //Then
         assertThat(articles).isNotNull();
+    }
+
+
+    //게시글 페이지 기능
+
+    @DisplayName("게시글 정보를 입력하면, 게시글을 생성")
+    @Test
+    void givenArticleInfo_whenSavingArticle_thenSavesArticle() {
+        //Given
+        given(articleRepository.save(any(Article.class))).willReturn(null);
+        //When
+        sut.saveArticle(ArticleDto.of(LocalDateTime.now(), "MCK", "title", "content", "#java"));
+        //Then
+        then(articleRepository).should().save(any(Article.class));
+
     }
 
 }
