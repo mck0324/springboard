@@ -2,6 +2,7 @@ package com.spring.springboard.service;
 
 import com.spring.springboard.domain.type.SearchType;
 import com.spring.springboard.dto.ArticleDto;
+import com.spring.springboard.dto.ArticleUpdateDto;
 import com.spring.springboard.repository.ArticleRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -29,5 +30,11 @@ public class ArticleService {
 
     public void saveArticle(ArticleDto dto) {
 
+    }
+    public void updateArticle(long articleId,ArticleUpdateDto dto) {
+
+    }
+
+    public void deleteArticle(long articleId) {
     }
 }

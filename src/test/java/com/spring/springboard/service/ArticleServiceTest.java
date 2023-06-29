@@ -3,6 +3,7 @@ package com.spring.springboard.service;
 import com.spring.springboard.domain.Article;
 import com.spring.springboard.domain.type.SearchType;
 import com.spring.springboard.dto.ArticleDto;
+import com.spring.springboard.dto.ArticleUpdateDto;
 import com.spring.springboard.repository.ArticleRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -60,6 +61,29 @@ class ArticleServiceTest {
         sut.saveArticle(ArticleDto.of(LocalDateTime.now(), "MCK", "title", "content", "#java"));
         //Then
         then(articleRepository).should().save(any(Article.class));
+
+    }
+
+    @DisplayName("게시글의 ID와 수정 정보를 입력하면, 게시글을 수정")
+    @Test
+    void givenArticleIdAndModifiedInfo_whenUpdatingArticle_thenUpdateArticle() {
+        //Given
+        given(articleRepository.save(any(Article.class))).willReturn(null);
+        //When
+        sut.updateArticle(1L, ArticleUpdateDto.of("title", "content", "#java"));
+        //Then
+        then(articleRepository).should().save(any(Article.class));
+
+    }
+    @DisplayName("게시글의 ID를 입력하면, 게시글을 삭제")
+    @Test
+    void givenArticleId_whenDeletingArticle_thenDeleteArticle() {
+        //Given
+        willDoNothing().given(articleRepository).delete(any(Article.class));
+        //When
+        sut.deleteArticle(1L);
+        //Then
+        then(articleRepository).should().delete(any(Article.class));
 
     }
 
